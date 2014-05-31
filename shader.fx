@@ -14,7 +14,11 @@ PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT ps;
 	ps.pos = input.position;
-	ps.position = input.position*float4(0.8, 0.8, 1, 0.5);
+	if (input.position.x == 1 && input.position.y == 1){
+		input.position.xy *= float2(0.0, 0.0);
+	}
+	ps.position = input.position*float4(0.8, 0.8, 1, 1);
+	
 	return ps;
 }
 
