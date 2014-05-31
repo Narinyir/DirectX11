@@ -1,4 +1,5 @@
 ﻿float time : TIME;
+float4 col:COLOR;
 struct VS_INPUT
 {
 	float4 position:POSITION;
@@ -14,11 +15,7 @@ PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT ps;
 	ps.pos = input.position;
-	if (input.position.x == 1 && input.position.y == 1){
-		input.position.xy *= float2(0.0, 0.0);
-	}
-	ps.position = input.position*float4(0.8, 0.8, 1, 1);
-	
+	ps.position = input.position;
 	return ps;
 }
 
@@ -29,7 +26,7 @@ float calcCol(float t, PS_INPUT input)
 
 float4 PS(PS_INPUT input) :SV_Target
 {
-	return float4(calcCol(time + 1.0, input), calcCol(time + 2.0, input), calcCol(time + 3.0, input), 1);
+	return col;
 }
 
 technique10 DefaultTechnique
