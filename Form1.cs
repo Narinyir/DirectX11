@@ -14,7 +14,6 @@ using SlimDX.Direct3D11;
 using SlimDX.DXGI;
 using Buffer = SlimDX.Direct3D11.Buffer;
 using Device = SlimDX.Direct3D11.Device;
-
 namespace DirectX_01
 {
     public partial class Form1 : Form
@@ -28,7 +27,7 @@ namespace DirectX_01
         private InputLayout inputLayout;
         private Effect effect;
         private float time = 0;
-
+        private Matrix projection;
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +44,8 @@ namespace DirectX_01
                 new VertexBufferBinding[] { new VertexBufferBinding(vertexBuffer, 16, 0) });//頂点バッファのセット
             device.ImmediateContext.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;//PrimitiveTopologyのセット。今回は三角形リスト
 
+            effect.GetVariableBySemantic("PROJECTION").AsMatrix().SetMatrix(projection);
+
             //最初の描画(薄い紫色)
             effect.GetVariableBySemantic("COLOR").AsVector().Set(new Vector4(1.0f, 0.8f, 1f, 1f));//float4 col:COLORに対して指定したベクトルをセット
             effect.GetTechniqueByIndex(0).GetPassByIndex(0).Apply(device.ImmediateContext);//エフェクトの適用
@@ -54,6 +55,7 @@ namespace DirectX_01
             effect.GetVariableBySemantic("COLOR").AsVector().Set(new Vector4(1f, 0f, 1f, 1f));//float4 col:COLORに対して指定したベクトルをセット
             effect.GetTechniqueByIndex(0).GetPassByIndex(0).Apply(device.ImmediateContext);//エフェクトの適用
             device.ImmediateContext.Draw(3, 3);//renderTargetに対して書き込み
+            effect.GetVariableBySemantic("LIGHT").AsVector().Set(new Vector4(Math.Abs((float)Math.Sin(time)), Math.Abs((float)Math.Cos(time)),1f , 1f));
 
             //バックバッファとフロントバッファを入れ替える
             swapChain.Present(0, PresentFlags.None);
@@ -107,14 +109,14 @@ namespace DirectX_01
             //四角形の頂点を表すリスト
             Vector4[] verticies = new Vector4[]
             {
-                new Vector4(-0.5f,0.75f,0f,1f),//左上手前の三角形
-                new Vector4(0f,0f,0f,1f),
-                new Vector4(-1f,0f,0f,1f), 
+                new Vector4(-0.5f,0.75f,5f,1f),//左上手前の三角形
+                new Vector4(0f,0f,5f,1f),
+                new Vector4(-1f,0f,5f,1f), 
  
  
-                new Vector4(0f,1f,0.5f,1f),//中央奥の大きい三角形
-                new Vector4(1f,-0.5f,0.5f,1f),
-                new Vector4(-1f,-0.5f,0.5f,1f), 
+                new Vector4(0f,1f,10f,1f),//中央奥の大きい三角形
+                new Vector4(1f,-0.5f,10f,1f),
+                new Vector4(-1f,-0.5f,10f,1f), 
             };
             using (DataStream ds = new DataStream(verticies, true, true))
             {
@@ -137,6 +139,7 @@ namespace DirectX_01
                 }, 
             });
             device.ImmediateContext.Rasterizer.SetViewports(new Viewport[] { new Viewport(0, 0, Width, Height, 0, 1), });
+            projection = Matrix.PerspectiveFovLH((float)Math.PI / 4f, Width/Height, 0.1f, 15);
         }
     }
 }

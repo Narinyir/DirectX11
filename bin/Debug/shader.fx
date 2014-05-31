@@ -1,5 +1,7 @@
 ﻿float time : TIME;
 float4 col:COLOR;
+float4x4 proj:projection;
+float4 li:LIGHT;
 struct VS_INPUT
 {
 	float4 position:POSITION;
@@ -15,7 +17,7 @@ PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT ps;
 	ps.pos = input.position;
-	ps.position = input.position;
+	ps.position = mul(input.position,proj);
 	return ps;
 }
 
@@ -26,7 +28,7 @@ float calcCol(float t, PS_INPUT input)
 
 float4 PS(PS_INPUT input) :SV_Target
 {
-	return col;
+	return col*li;
 }
 
 technique10 DefaultTechnique
