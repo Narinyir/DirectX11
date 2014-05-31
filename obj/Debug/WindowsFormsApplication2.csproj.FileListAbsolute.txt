@@ -1,0 +1,11 @@
+E:\pole\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+E:\pole\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+E:\pole\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
+E:\pole\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+E:\pole\WindowsFormsApplication2\bin\Debug\shader.fx
+E:\pole\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
+E:\pole\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
+E:\pole\WindowsFormsApplication2\bin\Debug\SlimDX.dll
+E:\pole\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+E:\pole\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+E:\pole\WindowsFormsApplication2\obj\Debug\DirectX_01.Form1.resources
