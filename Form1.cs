@@ -26,6 +26,7 @@ namespace DirectX_01
         private InputLayout inputLayout;
         private Effect effect;
         private float time = 0;
+        private ShaderResourceView sView;
 
         public Form1()
         {
@@ -35,6 +36,7 @@ namespace DirectX_01
         public void Render()
         {
             effect.GetVariableBySemantic("TIME").AsScalar().Set(time);
+            effect.GetVariableBySemantic("TEX").AsResource().SetResource(sView);
             device.ImmediateContext.OutputMerger.SetTargets(renderTarget);
             device.ImmediateContext.ClearRenderTargetView(renderTarget, new Color4(1, 0, 0, 1));
             device.ImmediateContext.InputAssembler.InputLayout = inputLayout;
@@ -107,7 +109,7 @@ namespace DirectX_01
             });
             device.ImmediateContext.Rasterizer.SetViewports(new Viewport[] { new Viewport(0, 0, Width, Height, 0, 1), });
             Texture2D sResource = Texture2D.FromFile(device , "tino.jpg");
-            ShaderResourceView sView = new ShaderResourceView(device,sResource);
+            sView = new ShaderResourceView(device,sResource);
         }
     }
 }
