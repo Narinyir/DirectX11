@@ -30,7 +30,10 @@ float calcCol(float t, PS_INPUT input)
 float4 PS(PS_INPUT input) :SV_Target
 {
 	//return float4(calcCol(time + 1.0, input), calcCol(time + 2.0, input), calcCol(time + 3.0, input), 1);
-	return tex.Sample(mySampler, float2(input.pos.x / 2.0 + 1 / 2.0, -input.pos.y / 2.0 + 1 / 2.0));
+	//return tex.Sample(mySampler, float2(input.pos.x / 2.0 + 1 / 2.0, -input.pos.y / 2.0 + 1 / 2.0));
+	float4 col = tex.Sample(mySampler, float2(input.pos.x / 2.0 + 1 / 2.0, -input.pos.y / 2.0 + 1 / 2.0));
+	col.rgb = 1.0.rrr - col.rgb;
+	return col;
 }
 
 technique10 DefaultTechnique
