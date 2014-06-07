@@ -106,6 +106,8 @@ namespace DirectX_01
                 }, 
             });
             device.ImmediateContext.Rasterizer.SetViewports(new Viewport[] { new Viewport(0, 0, Width, Height, 0, 1), });
+            Texture2D sResource = Texture2D.FromFile(device , "tino.jpg");
+            ShaderResourceView sView = new ShaderResourceView(device,sResource);
         }
     }
 }
