@@ -31,9 +31,9 @@ float4 PS(PS_INPUT input) :SV_Target
 {
 	//return float4(calcCol(time + 1.0, input), calcCol(time + 2.0, input), calcCol(time + 3.0, input), 1);
 	//return tex.Sample(mySampler, float2(input.pos.x / 2.0 + 1 / 2.0, -input.pos.y / 2.0 + 1 / 2.0));
-	float r = sqrt(dot(input.pos.xy,input.pos.xy));
-	float theta = atan(input.pos.y / input.pos.x);
-	float4 col = tex.Sample(mySampler, float2(input.pos.x*cos(r*time/1000)-input.pos.y*sin(r*time/1000),input.pos.x*sin(r*time/1000)+input.pos.y*(r*time/1000)));
+	//float r = sqrt(dot(input.pos.xy,input.pos.xy));
+	////float theta = atan(input.pos.y / input.pos.x);
+	//float4 col = tex.Sample(mySampler, float2(input.pos.x*cos(r*time/1000)-input.pos.y*sin(r*time/1000),input.pos.x*sin(r*time/1000)+input.pos.y*(r*time/1000)));
 	/*col.rgb = (-input.pos.y / 2.0 ) <= sin(input.pos.x * 10) ?
 		length(col.rgb / 1.732).rrr*float3(0.3, 0.59, 0.11)*float3(1,0.5,0) :
 			length(col.rgb / 1.732).rrr*float3(0.3, 0.59, 0.11)*(1,0,0.5);*/
